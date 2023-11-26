@@ -14,8 +14,6 @@ from PIL                  import Image
 MODEL_PATH = 'src/model/lstm_model.h5'
 TOKENIZER_PATH = 'src/model/tokenizer.pickle'
 
-lemmatizer = WordNetLemmatizer()
-
 model = load_model(MODEL_PATH)
 with open(TOKENIZER_PATH, 'rb') as handle:
     tokenizer = pickle.load(handle)
