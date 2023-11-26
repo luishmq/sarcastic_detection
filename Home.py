@@ -9,7 +9,7 @@ st.set_page_config(
 
 st.title("Bem-vindo(a) ao painel do Projeto sobre Detecção de Manchetes de Notícias Sarcásticas ! 🗞️")
 
-image = Image.open('imgs/manchete.jpeg') 
+image = Image.open('imgs/bazinga3.png') 
 st.sidebar.image(image)
 
 st.markdown(
