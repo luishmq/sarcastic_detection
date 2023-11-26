@@ -5,6 +5,7 @@ import re
 import string
 import pickle
 import streamlit as st
+from nltk.stem import WordNetLemmatizer
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 from tensorflow.keras.preprocessing.text import Tokenizer
@@ -13,6 +14,8 @@ from PIL                  import Image
 # Carregar o modelo treinado e o tokenizer
 MODEL_PATH = 'src/model/lstm_model.h5'
 TOKENIZER_PATH = 'src/model/tokenizer.pickle'
+
+lemmatizer = WordNetLemmatizer()
 
 model = load_model(MODEL_PATH)
 with open(TOKENIZER_PATH, 'rb') as handle:
@@ -29,6 +32,23 @@ def load_data():
     df_raw = pd.DataFrame(datastore)
     
     return df_raw
+
+def lemmatize_word(word):
+    lemma = lemmatizer.lemmatize(word, pos=wordnet.VERB)
+    return lemmatizer.lemmatize(lemma, pos=wordnet.NOUN)
+
+def process_text(text):
+    text = text.lower()
+    
+    text = ''.join([char for char in text if char not in string.punctuation])
+    
+    words = text.split()
+    lemmatized_words = [lemmatize_word(word) for word in words]
+    text = ' '.join(lemmatized_words)
+    
+    text = re.sub(r'\s+', ' ', text).strip()
+    
+    return text
 
 def predict_sentiment(text):
     sequence_text = tokenizer.texts_to_sequences([text])
