@@ -36,6 +36,10 @@ article_link | Article link |
 
 # 5.0 Machine Learning
 
+![](imgs/cm.png)
+
+![](imgs/roc.png)
+
 # 6.0 Results
 
 ![](imgs/results.png)
